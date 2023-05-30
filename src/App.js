@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import styled from "styled-components";
 import SynthEngine from "./SynthEngine";
-import Footer from "./Footer";
+import Footer from "./footer";
 
 // Set the button colors using styled-components
 const H2 = styled.h2`
