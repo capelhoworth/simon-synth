@@ -23,6 +23,18 @@ function SynthEngine() {
     ]);
     const [synthType, setSynthType] = useState('amSynth')
 
+    const volumeChange = (event) => {
+        setVolume(event.target.value)
+    }
+
+    const delayAmountChange = (event) => {
+        setDelayAmount(event.target.value)
+    }
+
+    const distortionChange = (event) => {
+        setDistortion(event.target.value)
+    }
+
     return (
         <>
             <Song isPlaying={isPlaying}>
@@ -40,37 +52,35 @@ function SynthEngine() {
             <Stack spacing={5} direction="column" sx={{ mb: 1 }} alignItems="center" className='CenterAlign'>
                 <Box sx={{ width: 300 }}>
                     <Slider
-                        diameter={100}
                         min={-50}
                         max={10}
                         step={1}
-                        value={volume}
-                        onValueChange={setVolume}
-                        ariaLabelledBy={'volume'}
+                        defaultValue={volume}
+                        onChange={volumeChange}
+                        aria-label="Volume"
+                        marks
                     >
                         <label id={'volume'}>Volume</label>
                     </Slider >
-
                     <Slider
-                        diameter={100}
                         min={0}
                         max={1}
                         step={.25}
-                        value={delayAmount}
-                        onValueChange={setDelayAmount}
-                        ariaLabelledBy={'delay-amount'}
+                        defaultValue={delayAmount}
+                        onChange={delayAmountChange}
+                        aria-label="Delay"
+                        marks
                     >
                         <label id={'delay-amount'}>Delay Amount</label>
                     </Slider >
-
                     <Slider
-                        diameter={100}
                         min={0}
                         max={1}
                         step={.25}
-                        value={distortionAmount}
-                        onValueChange={setDistortion}
-                        ariaLabelledBy={'delay-amount'}
+                        defaultValue={distortionAmount}
+                        onChange={distortionChange}
+                        aria-label="Distortion"
+                        marks
                     >
                         <label id={'delay-amount'}>Distortion</label>
                     </Slider >
