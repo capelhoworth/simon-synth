@@ -22,10 +22,13 @@ function SynthEngine() {
   }
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [volume, setVolume] = useState(0);
-  const [delayAmount, setDelayAmount] = useState(0);
   const [distortionAmount, setDistortion] = useState(0);
+  const [tremoloAmount, setTremoloAmount] = useState(0);
+  const [autoFilterAmount, setAutoFilterAmount] = useState(0);
+  const [delayAmount, setDelayAmount] = useState(0);
+  const [reverbAmount, setReverbAmount] = useState(0);
   const [steps] = useState([
-    ["C3", "E3", "A3"],
+    ["C3", "F3", "A3"],
     null,
     ["C3", "E3", "G3", "B3"],
     null,
@@ -40,12 +43,24 @@ function SynthEngine() {
     setVolume(event.target.value);
   };
 
+  const distortionChange = (event) => {
+    setDistortion(event.target.value);
+  };
+
+  const tremoloChange = (event) => {
+    setTremoloAmount(event.target.value);
+  };
+
+  const autoFilterChange = (event) => {
+    setAutoFilterAmount(event.target.value);
+  };
+
   const delayAmountChange = (event) => {
     setDelayAmount(event.target.value);
   };
 
-  const distortionChange = (event) => {
-    setDistortion(event.target.value);
+  const reverbAmountChange = (event) => {
+    setReverbAmount(event.target.value);
   };
 
   return (
@@ -56,7 +71,10 @@ function SynthEngine() {
 
           {/* Setup our effect chain */}
           <Effect type="distortion" wet={distortionAmount} />
+          <Effect type="tremolo" wet={tremoloAmount} />
+          <Effect type="autoFilter" wet={autoFilterAmount} />
           <Effect type="feedbackDelay" wet={delayAmount} />
+          <Effect type="freeverb" wet={reverbAmount} />
         </Track>
       </Song>
       <Stack
@@ -80,6 +98,45 @@ function SynthEngine() {
           >
             <label id={"volume"}>Volume</label>
           </Slider>
+          <Typography id="input-slider">Distortion</Typography>
+          <Slider
+            min={0}
+            max={1}
+            step={0.01}
+            defaultValue={distortionAmount}
+            onChange={distortionChange}
+            aria-label="Distortion"
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+          >
+            <label id={"distortion-amount"}>Distortion</label>
+          </Slider>
+          <Typography id="input-slider">Tremolo</Typography>
+          <Slider
+            min={0}
+            max={1}
+            step={0.01}
+            defaultValue={tremoloAmount}
+            onChange={tremoloChange}
+            aria-label="Tremolo"
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+          >
+            <label id={"tremolo-amount"}>Tremolo</label>
+          </Slider>
+          <Typography id="input-slider">AutoFilter</Typography>
+          <Slider
+            min={0}
+            max={1}
+            step={0.01}
+            defaultValue={autoFilterAmount}
+            onChange={autoFilterChange}
+            aria-label="AutoFilter"
+            valueLabelDisplay="auto"
+            getAriaValueText={valuetext}
+          >
+            <label id={"autoFilter-amount"}>AutoFilter</label>
+          </Slider>
           <Typography id="input-slider">Delay</Typography>
           <Slider
             min={0}
@@ -93,18 +150,18 @@ function SynthEngine() {
           >
             <label id={"delay-amount"}>Delay Amount</label>
           </Slider>
-          <Typography id="input-slider">Distortion</Typography>
+          <Typography id="input-slider">Reverb</Typography>
           <Slider
             min={0}
             max={1}
             step={0.01}
-            defaultValue={distortionAmount}
-            onChange={distortionChange}
-            aria-label="Distortion"
+            defaultValue={reverbAmount}
+            onChange={reverbAmountChange}
+            aria-label="Reverb"
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
           >
-            <label id={"delay-amount"}>Distortion</label>
+            <label id={"reverb-amount"}>Reverb Amount</label>
           </Slider>
         </Box>
       </Stack>
