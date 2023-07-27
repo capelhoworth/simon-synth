@@ -1,4 +1,4 @@
-// import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // const PianoRollFooter: React.FC = () => {
 //   // Initialize a state to keep track of the clicked squares
